@@ -6,6 +6,7 @@ import { FormWindow } from './form-wrapper/FormWindow';
 import { authAction } from './store/reducer';
 import { TypeForm } from './store/types';
 import { selectAuthUser, selectIsOpenLogin, selectTypeForm } from './store/selectors';
+import { Button } from '../ui-library';
 
 function App() {
   const dispatch = useDispatch();
