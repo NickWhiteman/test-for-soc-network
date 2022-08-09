@@ -3,10 +3,6 @@ import React from 'react';
 
 import { IButtonProps } from "./types";
 
-const ButtonContainer: React.FC<IButtonProps> = (props) => {
-  return <Button {...props} />
-}
-
 const Button: React.FC<IButtonProps> = ({
   mode,
   type,
@@ -41,4 +37,4 @@ const Button: React.FC<IButtonProps> = ({
   };
 };
 
-export default React.memo(ButtonContainer);
+export default React.memo(Button);

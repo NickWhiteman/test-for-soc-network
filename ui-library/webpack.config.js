@@ -2,26 +2,34 @@ const path = require('path');
 
 module.exports = {
     mode: 'production',
-    entry: './src/index.ts',
+    entry: {
+        index: path.resolve(__dirname, './src/index.ts')
+    },
     output: {
-        filename: 'index.js',
+        filename: '[name].bundle.js',
         path: path.resolve(__dirname, 'dist'),
         clean: true,
         libraryTarget: 'umd'
     },
     resolve: {
-        extensions: ['.ts', 'tsx'],
+        extensions: ['.ts', '.tsx', '.js'],
     },
     externals: {
-        react: 'react'
+        react: 'react',
+        node_modules: '/node_modules',
+        scss: './src/components/[name]/style/[name].scss'
     },
     module: {
         rules: [
             {
-                test: /\.(ts | tsx)?$/,
+                test: /\.(?:ts|tsx)$/,
                 use: ['ts-loader'],
                 exclude: /node_modules/
-            }
+            },
+            {
+                test: /\.css$/i,
+                use: ['style-loader', 'css-loader']
+            },
         ]
     }
-}
+};
