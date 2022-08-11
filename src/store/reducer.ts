@@ -21,7 +21,7 @@ export const PostReducer = createSlice({
     getPosts(state: IPostsState, {payload}: PayloadAction<Post[]>) {
       state.posts = payload
     },
-    openPost(state: IPostsState, {payload}: PayloadAction<number>) {
+    openPostId(state: IPostsState, {payload}: PayloadAction<number>) {
       state.openIdPosts = payload
     },
     resetOpenId(state: IPostsState) {

@@ -1,4 +1,3 @@
-import { IRootState } from ".";
 import { IPostsState } from "./types";
 
 export const selectPosts = (state: IPostsState) => state.posts;

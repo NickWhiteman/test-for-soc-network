@@ -2,8 +2,6 @@
 
 # dependencies
 /node_modules
-/src/ui-library/node_modules
-/.pnp
 .pnp.js
 
 # testing
@@ -11,6 +9,7 @@
 
 # production
 /build
+/ui-library/node_modules
 
 # misc
 .DS_Store

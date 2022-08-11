@@ -4,7 +4,7 @@ import { put, call, select } from "redux-saga/effects";
 import api from "../../api";
 import { postAction } from "../reducer";
 import { selectIdDeletePost, selectIdOpenPosts } from "../selectors";
-import { CreatePostType, Post } from "../types";
+// import { CreatePostType, Post } from "../types";
 
 /*
  *   actions saga
@@ -43,7 +43,7 @@ export function* getPostByIdSaga() {
     const {data} = yield call(api.posts.getPostsById, idOpenPost);
   
     if ( data ) {
-      yield put(postAction.openPost(data));
+      yield put(postAction.getOpenPost(data));
     }
   } catch (error) {
     console.log(`Error: ${error}`)
