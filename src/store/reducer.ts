@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { IPostsState } from "./types";
+import { IPostsState, Post } from "./types";
 
 const STORE_NAME = '@authorization';
 
@@ -9,17 +9,33 @@ const initialState: IPostsState = {
   /*
   * ?? it need field or not ??
   */
-  openPosts: undefined, 
-  deletePosts: undefined
+  openPost: undefined,
+  openIdPosts: undefined, 
+  deleteIdPosts: undefined
 };
 
 export const PostReducer = createSlice({
   name: STORE_NAME,
   initialState,
   reducers: {
-    getPosts(state: IPostsState, {payload}: PayloadAction<string[]>) {
+    getPosts(state: IPostsState, {payload}: PayloadAction<Post[]>) {
       state.posts = payload
     },
+    openPost(state: IPostsState, {payload}: PayloadAction<number>) {
+      state.openIdPosts = payload
+    },
+    resetOpenId(state: IPostsState) {
+      state.openIdPosts = undefined
+    },
+    deletePost(state: IPostsState, {payload}: PayloadAction<number>) {
+      state.deleteIdPosts = payload
+    },
+    resetDeleteId(state: IPostsState) {
+      state.deleteIdPosts = undefined
+    },
+    getOpenPost(state: IPostsState, {payload}: PayloadAction<Post>) {
+      state.openPost = payload
+    }
   }
 });
 

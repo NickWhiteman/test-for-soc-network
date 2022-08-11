@@ -1,67 +1,35 @@
 import './style/style.css';
-import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
-// import { selectIsDeleteMode, selectIsOpenModal } from './store/selectors';
-import { FormWindow } from './form-wrapper/FormWindow';
-import { authAction } from './store/reducer';
-import { TypeForm } from './store/types';
-import { selectAuthUser, selectIsOpenLogin, selectTypeForm } from './store/selectors';
-import { Button } from '../ui-library';
+import { Button, Modal } from './ui-library';
+import { PostsMaterial } from './components';
+import { sagaActions } from './store/saga/saga';
+import { useDispatch } from 'react-redux';
+import { postAction } from './store/reducer';
 
 function App() {
   const dispatch = useDispatch();
-  const typeForm = useSelector(selectTypeForm)
-  const authUser = useSelector(selectAuthUser);
-  const isOpenLogin = useSelector(selectIsOpenLogin)
 
-  const singUp: TypeForm = {
-    type: 'singUp'
+  useEffect(() => {
+    dispatch(sagaActions.getPosts());
+  })
+
+  const createPost = () => {
+    dispatch({})
   }
-  const singIn: TypeForm = {
-    type: 'singIn'
-  }
-  const getSingUp = () => {
-    dispatch(authAction.typeForm(singUp))
-  };
-  const getLogIn = () => {
-    dispatch(authAction.typeForm(singIn))
-  };
 
   return (
     <div className="App">
       <div className="header__block">
-        {
-          authUser || typeForm === 'update' 
-            ? <div className="auth_user">{authUser.login}</div> 
-            : (
-                typeForm === 'singIn' &&
-                <Button 
-                  mode={'button-primary'} 
-                  children={'Sing up'}
-                  type='button'
-                  onClick={() => getSingUp()}/>
-              ) || (
-              
-                typeForm === 'singUp' &&
-                <Button 
-                  mode={'button-primary'} 
-                  children={'Sing In'}
-                  type='button'
-                  onClick={() => getLogIn()}/>
-              )
-        }
+       <Button 
+        mode={'button-primary'} 
+        children={'Create post'} 
+        onClick={createPost} />
       </div>
       <div className="app__body">
-        <div className="app__auth">
-          {
-            isOpenLogin && <FormWindow />
-          }
-          {
-            authUser.login &&
-              <div className="auth__page">{`ВЫ АВТОРИЗОВАЛИСЬ ${authUser.login}`}</div>
-          }
-        </div>
+        <PostsMaterial />
       </div>
+      <Modal />
     </div>
   );
 }
